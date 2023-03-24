@@ -62,11 +62,14 @@ if __name__ == "__main__":
 
     logging.root.info("Configuring build")
 
+    target = "x86_64-linux-gnu" if "x86" in args.target else "aarch64-linux-gnu"
     builder.execute(
         args,
         [
             "./configure",
             "--prefix=/",
+            f"--host={target}",
+            f"--target={target}",
         ],
         cwd=source_dir,
         env=env,
